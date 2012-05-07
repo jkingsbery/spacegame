@@ -1,0 +1,18 @@
+{
+	"name":"Freedom Station",
+	"canRefuel":true,
+	"position":{
+		"x":3500,
+		"y":300
+	},
+	"missions":[
+		"net.kingsbery.games.scenario.LunarScienceEquipmentDeliveryScenario",
+		"net.kingsbery.games.scenario.TransportScientistToMarsScenario"],
+	"items":{
+		"Nitrogen":{
+			"name":"Nitrogen",
+			"count":100,
+			"cost":10
+		}
+	}
+}

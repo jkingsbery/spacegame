@@ -1,0 +1,9 @@
+{
+	"name":"Mars",
+	"mass":15000,
+	"color":"FFFF0000",
+	"location":{
+		"x":3000,
+		"y":300
+	}
+}
