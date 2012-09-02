@@ -29,12 +29,12 @@ public class BuildingDrawer {
         log.info("Adding buildings along rode at point " + center);
         
         Vector target = center.plus(perp.scale(25));
-        Building first = new Building(target, 20, 20, 10,map.tileValue(target));
+        Building first = new Building(target,perp, 20, 20, 10,map.tileValue(target));
         if(map.unobstructed(first)&&first.getColor()!=Color.white){
           map.addBuilding(first);
         }
         Vector target2 = center.plus(perp.scale(-25));
-        Building second = new Building(target2, 20, 20, 10,map.tileValue(target2));
+        Building second = new Building(target2,perp.scale(-1), 20, 20, 10,map.tileValue(target2));
         if(map.unobstructed(second)&&second.getColor()!=Color.white){
           map.addBuilding(second);
         }

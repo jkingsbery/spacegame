@@ -12,13 +12,16 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 public class Building {
 
   private Vector center;
+  private Vector direction;
   private double width;
   private double depth;
   private double height;
   private Color color=Color.blue;
   
-  public Building(Vector center, double width, double depth, double height,Color color) {
+  
+  public Building(Vector center, Vector direction, double width, double depth, double height,Color color) {
     this.center = center;
+    this.direction=direction;
     this.width = width;
     this.depth = depth;
     this.height = height;
@@ -30,7 +33,7 @@ public class Building {
   }
 
   public Building(Vector vector, int i, int j, int k) {
-    this(vector,i,j,k,Color.blue);
+    this(vector,Vector.I,i,j,k,Color.blue);
   }
 
   public double getHeight() {
@@ -47,6 +50,14 @@ public class Building {
   
   public void setCenter(Vector x){
     this.center=x;
+  }
+  
+  public Vector getDirection(){
+    return this.direction;
+  }
+  
+  public void setDirection(Vector dir){
+    this.direction=dir;
   }
   
   public double getWidth(){
@@ -101,6 +112,8 @@ public class Building {
     result.add(new Wall(base.get(base.size() - 1), base.get(0)));
     return result;
   }
+  
+  
 
   
   public static class Wall {
@@ -133,8 +146,9 @@ public class Building {
     return result;
   }
 
+  @JsonIgnore
   public boolean isCylinder() {
-    return true;
+    return false;
   }
 
 }

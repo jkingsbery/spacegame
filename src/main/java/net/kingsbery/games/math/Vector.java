@@ -12,6 +12,9 @@ public class Vector implements Serializable {
   final double x;
   final double y;
   
+  public static final Vector I = new Vector(1,0);
+  public static final Vector J = new Vector(0,1);
+  
   @JsonCreator
   public Vector(@JsonProperty("x") double x, @JsonProperty("y") double y){
     this.x=x;

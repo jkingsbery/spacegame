@@ -64,7 +64,7 @@ public class FullScreenModel {
   public FullScreenModel(int numBuffers, GraphicsDevice device) {
     try {
       GLCapabilities capabilities = SpaceDisplay.createGLCapabilities();
-      LunarColony canvas = new LunarColony(capabilities, 800, 500);
+      GameWorldGraphics canvas = new SpaceStationGraphics(capabilities, 800, 500);
       GraphicsConfiguration gc = device.getDefaultConfiguration();
       mainFrame = new Frame(gc);
       mainFrame.setUndecorated(true);

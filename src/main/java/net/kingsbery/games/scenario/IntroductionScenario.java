@@ -88,7 +88,7 @@ public class IntroductionScenario implements Scenario,Serializable {
       case 5:
         //TODO Get this to show up before docking menu.
         if(playerShip.getFuel()==playerShip.getMaxFuel() && tracker.dockedWith()==null ){
-          tracker.setMessage("You've refueled, but you ship is still a miss. How about making some money to make repairs?");
+          tracker.setMessage("You've refueled, but your ship is still a mess.\n\nHow about making some money to make repairs?");
           tracker.setMessage("There isn't much Nitrogen on the Moon, so it usually goes for a good price.\n"+
               "Try purchasing some Nitrogen here at Freedom Station and delivering it to the Odyssey orbiter");
           tracker.setMessage("To get you started on your way, here's some money.");

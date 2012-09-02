@@ -33,7 +33,7 @@ import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureData;
 import com.sun.opengl.util.texture.TextureIO;
 
-public class LunarColony extends GameWorldGraphics{
+public class SpaceStationGraphics extends GameWorldGraphics {
 
   /** The GL unit (helper class). */
   private GLU glu;
@@ -59,11 +59,11 @@ public class LunarColony extends GameWorldGraphics{
    * @param height
    *          The window height.
    */
-  public LunarColony(GLCapabilities capabilities, int width, int height) {
+  public SpaceStationGraphics(GLCapabilities capabilities, int width, int height) {
     addGLEventListener(this);
     try {
       this.colonyMap = JsonMapper.getInstance().readValue(
-//          new File("fra-mauro-colony-buildings.json"), ColonyMap.class);
+      // new File("fra-mauro-colony-buildings.json"), ColonyMap.class);
           new File("tranquility-colony-buildings.json"), ColonyMap.class);
     } catch (Exception e) {
       throw new RuntimeException(e);
@@ -183,15 +183,21 @@ public class LunarColony extends GameWorldGraphics{
     // glu.gluSphere(earth, radius, slices, stacks);
     // glu.gluDeleteQuadric(earth);
 
-    drawGround(gl);
+    float rgba3[] = new float[] { 0.8f, 0.8f, 0.8f, 1.0f };
+    gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT_AND_DIFFUSE, rgba3, 0);
+    gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_SPECULAR, rgba3, 0);
+    gl.glMaterialf(GL.GL_FRONT_AND_BACK, GL.GL_SHININESS, 1.0f);
+    gl.glPushMatrix();
+    gl.glRotated(90, 1.0, 0.0,0.0);
+    gl.glTranslated(-1 * 0, 0, 0.0);
+    GLUquadric quad = glu.gluNewQuadric();
+    glu.gluQuadricDrawStyle(quad, GLU.GLU_FILL);
+    glu.gluQuadricNormals(quad, GLU.GLU_FLAT);
+    glu.gluQuadricOrientation(quad, GLU.GLU_OUTSIDE);
+    glu.gluCylinder(quad, 5, 5,100, 16, 16);
+    glu.gluDeleteQuadric(quad);
 
-    for (Building building : colonyMap.getBuildings()) {
-      drawBuilding(gl, building);
-    }
-
-    for (Road road : colonyMap.getRoads()) {
-      drawRoad(gl, road);
-    }
+    gl.glPopMatrix();
 
   }
 
@@ -253,8 +259,10 @@ public class LunarColony extends GameWorldGraphics{
             building.getHeight());
         gl.glEnd();
       }
-      gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT_AND_DIFFUSE, new float[]{1.0f,1.0f,1.0f,1.0f}, 0);
-      gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_SPECULAR, new float[]{1.0f,1.0f,1.0f,1.0f}, 0);
+      gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT_AND_DIFFUSE,
+          new float[] { 1.0f, 1.0f, 1.0f, 1.0f }, 0);
+      gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_SPECULAR, new float[] { 1.0f,
+          1.0f, 1.0f, 1.0f }, 0);
     }
   }
 
@@ -288,6 +296,7 @@ public class LunarColony extends GameWorldGraphics{
   }
 
   private double radians = Math.PI / 4;
+
   /**
    * @param gl
    *          The GL context.
@@ -297,33 +306,14 @@ public class LunarColony extends GameWorldGraphics{
    *          The distance from the screen.
    */
 
- 
-
-  /**
-   * Starts the JOGL mini demo.
-   * 
-   * @param args
-   *          Command line args.
-   */
-  public final static void main(String[] args) {
-    GLCapabilities capabilities = createGLCapabilities();
-    GLCanvas canvas = new LunarColony(capabilities, 800, 500);
-    JFrame frame = new JFrame("Mini JOGL Demo (breed)");
-    frame.getContentPane().add(canvas, BorderLayout.CENTER);
-    frame.setSize(800, 500);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setVisible(true);
-    canvas.requestFocus();
-  }
-
-  
-  public boolean noCollision(Vector3 player,int size) {
-    Building playerOutline = new Building(player.projectXY(),Vector.I,size,size,2.0,Color.blue); 
-    for(Building building : colonyMap.getBuildings()){
+  public boolean noCollision(Vector3 player, int size) {
+    Building playerOutline = new Building(player.projectXY(), Vector.I, size,
+        size, 2.0, Color.blue);
+    for (Building building : colonyMap.getBuildings()) {
       Area area = new Area();
       area.add(new Area(playerOutline.asPolygon()));
       area.intersect(new Area(building.asPolygon()));
-      if( !area.isEmpty()){
+      if (!area.isEmpty()) {
         return false;
       }
     }

@@ -103,8 +103,8 @@ public class SystemDrawer {
     g.fillOval(bounds.width / 2, bounds.height / 2, 3, 3);
   }
   public static void main(String args[]) throws IOException {
-    ColonyMap map = SystemDrawer.drawMap(new StochasticLSystem(), 7);
-    map.setName("Tranquility Colony");
+    ColonyMap map = SystemDrawer.drawMap(new StochasticLSystem(), 3);
+    map.setName("Fra Mauro Colony");
     ColonyMap.toImage(map);
     ObjectMapper mapper = JsonMapper.getInstance();
     mapper.writeValue(new File(map.getFileName()+".json"), map);

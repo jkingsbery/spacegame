@@ -13,9 +13,9 @@ public class FullScreenKeyListener implements KeyListener {
 
   private static final Log log = LogFactory.getLog(FullScreenKeyListener.class);
 
-  private LunarColony colony;
+  private GameWorldGraphics colony;
 
-  public FullScreenKeyListener(LunarColony colony) {
+  public FullScreenKeyListener(GameWorldGraphics colony) {
     this.colony = colony;
   }
 

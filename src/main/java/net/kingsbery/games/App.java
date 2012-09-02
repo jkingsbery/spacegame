@@ -105,7 +105,6 @@ public class App {
     g.setColor(Color.gray);
     g.fillRect(0,0, bounds.width, bounds.height);
     g.setColor(Color.white);
-//    SystemDrawer.draw(LSystem.getPlantSystem(), 9, bounds, g);
     SystemDrawer.draw(tracker.getFocus(),new StochasticLSystem(),7,bounds,g);
   }
 
@@ -153,7 +152,7 @@ public class App {
 
   private static void drawInGameMenu(Menu pauseMenu, Rectangle bounds,
       Graphics g) {
-    if (pauseMenu.stillGoing()) {
+    if (pauseMenu!=null && pauseMenu.stillGoing()) {
       int left = (int) (bounds.getWidth() / 2 - 200);
       int top = (int) (bounds.getHeight() / 2 - 400);
       g.setColor(Color.gray);
