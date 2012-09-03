@@ -100,7 +100,9 @@ public class GameStateTracker implements Serializable {
       }
       if (landing()) {
         if (this.lander.getPosition().getY() > 800) {
+          log.info("Leaving Orbit");
           this.enterOrbit();
+          this.getPlayer().setPosition(this.getPlayer().getPosition().plus(this.getPlayer().getDirection().scale(100)));
           this.lander = null;
         } else if (this.lander.getPosition().getY() > 0) {
           this.lander.setGravity(new Vector(0, -1));

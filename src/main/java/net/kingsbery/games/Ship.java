@@ -179,6 +179,11 @@ public class Ship implements Serializable {
     this.thrust(this.velocity.scale(-1));
   }
 
+  public void turnAround(){
+      this.setVelocity(this.velocity.scale(-1));
+      log.info("New velocity: " + this.velocity);
+  }
+  
   public void crash() {
     if (isPlayer()) {
       alive = false;
@@ -458,5 +463,9 @@ public class Ship implements Serializable {
   }
   public List<ShipUpgrade> getUpgrades(){
     return this.upgrades;
+  }
+
+  public Vector getDirection() {
+      return this.getVelocity().scale(1/this.getVelocity().size());
   }
 }

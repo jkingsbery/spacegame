@@ -295,8 +295,8 @@ public class App {
         g.fillOval(
             (int) (miniMapLeftEdge + 20 + ((location.getX() - leftMost) / scaling)),
             (int) (location.getY() / scaling) + 20,
-            25,//1000 / scaling * size / 300,
-            25);//1000 / scaling * size / 300);
+            (int)Math.min(Math.sqrt(planet.getSize()), 5),
+            (int)Math.min(Math.sqrt(planet.getSize()), 5));
       }
     }
   }
